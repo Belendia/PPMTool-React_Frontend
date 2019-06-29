@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS } from "./types";
+import { GET_ERRORS, GET_PROJECTS } from "./types";
 
 export const createProject = (project, history) => {
   return dispatch => {
@@ -14,5 +14,16 @@ export const createProject = (project, history) => {
           payload: error.response.data
         });
       });
+  };
+};
+
+export const getProjects = () => {
+  return dispatch => {
+    axios.get("http://localhost:8080/api/project").then(response => {
+      dispatch({
+        type: GET_PROJECTS,
+        payload: response.data
+      });
+    });
   };
 };
