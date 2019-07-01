@@ -1,10 +1,10 @@
-import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from "./types";
+import axios from "../axios-ppm";
+import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
 
 export const createProject = (project, history) => {
   return dispatch => {
     axios
-      .post("http://localhost:8080/api/project", project)
+      .post("/api/project", project)
       .then(response => {
         history.push("/dashboard");
         dispatch({
@@ -23,7 +23,7 @@ export const createProject = (project, history) => {
 
 export const getProjects = () => {
   return dispatch => {
-    axios.get("http://localhost:8080/api/project").then(response => {
+    axios.get("/api/project").then(response => {
       dispatch({
         type: GET_PROJECTS,
         payload: response.data
@@ -35,7 +35,7 @@ export const getProjects = () => {
 export const getProject = (id, history) => {
   return dispatch => {
     axios
-      .get(`http://localhost:8080/api/project/${id}`)
+      .get(`/api/project/${id}`)
       .then(response => {
         dispatch({
           type: GET_PROJECT,
@@ -48,6 +48,25 @@ export const getProject = (id, history) => {
         //   payload: error.response.data
         // });
         history.push("/dashboard");
+      });
+  };
+};
+
+export const deleteProject = id => {
+  return dispatch => {
+    axios
+      .delete(`/api/project/${id}`)
+      .then(response => {
+        dispatch({
+          type: DELETE_PROJECT,
+          payload: id
+        });
+      })
+      .catch(error => {
+        // dispatch({
+        //   type: GET_ERRORS,
+        //   payload: error.response.data
+        // });
       });
   };
 };
