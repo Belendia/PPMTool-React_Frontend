@@ -152,14 +152,14 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     createProject: (project, history) =>
-//       dispatch(createProject(project, history))
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    addProjectTask: (projectIdentifier, newTask, history) =>
+      dispatch(addProjectTask(projectIdentifier, newTask, history))
+  };
+};
 
 export default connect(
   mapStateToProps,
-  { addProjectTask }
+  mapDispatchToProps
 )(AddProjectTask);
