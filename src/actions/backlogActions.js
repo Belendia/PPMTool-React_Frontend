@@ -37,9 +37,10 @@ export const getBacklog = backlog_id => {
         });
       })
       .catch(error => {
+        const e = error.data ? error.data : error;
         dispatch({
           type: GET_ERRORS,
-          payload: error.data
+          payload: e
         });
       });
   };
